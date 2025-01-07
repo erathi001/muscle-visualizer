@@ -1,26 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import FrontBody from './components/FrontBody';
+import Muscle from './pages/Muscle';
 
 function App() {
+  const [page, setPage] = React.useState("home");
+  const [muscle, setMuscle] = React.useState("");
+
+  function doMuscleClick(bodyPart:string) {
+    setPage("muscle");
+    setMuscle(bodyPart);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {page === "home" && (
+        <div>
+          <FrontBody onBodyPartClick = {doMuscleClick}/>
+        </div>
+      )}
+      {page === "muscle" && (
+        <div>
+          <Muscle muscle = {muscle} />
+        </div>
+      )}
     </div>
   );
 }
+
 
 export default App;
